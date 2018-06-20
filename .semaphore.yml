@@ -46,7 +46,7 @@ blocks:
       jobs:
       - name: Install bundle 2
         commands:
-          - checkout && $SEMAPHORE_GIT_DIR
+          - checkout && cd $SEMAPHORE_GIT_DIR
           - mv .semaphore/hetzner_storage_bx20 /tmp/key
           - export SSH_PRIVATE_KEY_PATH=/tmp/key
           - cd
