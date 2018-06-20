@@ -46,9 +46,13 @@ blocks:
       jobs:
       - name: Install bundle 2
         commands:
+          - checkout && $SEMAPHORE_GIT_DIR
+          - mv .semaphore/hetzner_storage_bx20 /tmp/key
+          - export SSH_PRIVATE_KEY_PATH=/tmp/key
+          - cd
+          - rm -rf $SEMAPHORE_GIT_DIR
           - echo "v1-git" > /tmp/git-key
           - cache restore --key /tmp/git-key
-          - checkout
           - cd $SEMAPHORE_GIT_DIR
           - cache restore --key Gemfile.lock
           - bundle install --path=vendor/bundle
