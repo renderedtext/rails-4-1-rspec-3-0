@@ -30,6 +30,16 @@ blocks:
 
   - name: "Stage 2 -- reuse cache"
     build:
+      env_vars:
+        - name: SEMAPHORE_CACHE_USERNAME
+          value: "u180539"
+        - name: SEMAPHORE_CACHE_URL
+          value: "u180539.your-storagebox.de"
+        - name: SEMAPHORE_CACHE_URL
+          value: "u180539.your-storagebox.de"
+        - name: SSH_PRIVATE_KEY_PATH
+          value: .semaphore/hetzner_storage_bx20
+
       jobs:
       - name: Install bundle 2
         commands:
