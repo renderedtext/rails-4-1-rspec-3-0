@@ -25,6 +25,8 @@ blocks:
       - name: Install bundle
         commands:
           - pwd
+          - ls .semaphore
+          - env
           - cache restore --key Gemfile.lock
           - bundle install --path=vendor/bundle
           - cache store --key Gemfile.lock --path vendor
