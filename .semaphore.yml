@@ -24,9 +24,12 @@ blocks:
       jobs:
       - name: Install bundle 1
         commands:
+          - export GIT_KEY=v1-git
           - cache restore --key Gemfile.lock
+          - cache restore --key $GIT_KEY
           - bundle install --path=vendor/bundle
           - cache store --key Gemfile.lock --path vendor
+          - cache store --key $GIT_KEY --path $SEMAPHORE_GIT_DIR/.git
 
   - name: "Stage 2 -- reuse cache"
     build:
