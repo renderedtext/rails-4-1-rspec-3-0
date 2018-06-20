@@ -2,7 +2,7 @@ version: "v3.0"
 name: My first pipeline
 semaphore_image: standard
 blocks:
-  - name: "Stage 1"
+  - name: "Stage 1 -- create cache"
     build:
       prologue:
         commands:
@@ -22,26 +22,19 @@ blocks:
           value: .semaphore/hetzner_storage_bx20
 
       jobs:
-      - name: Install bundle
+      - name: Install bundle 1
         commands:
-          - pwd
-          - ls .semaphore
-          - env
           - cache restore --key Gemfile.lock
           - bundle install --path=vendor/bundle
           - cache store --key Gemfile.lock --path vendor
 
-      - name: List files
-        commands:
-          - ls -l vendor
-
-  - name: "Stage 2"
+  - name: "Stage 2 -- reuse cache"
     build:
       jobs:
-      - name: Echo job
+      - name: Install bundle 2
         commands:
           - checkout
           - cd $SEMAPHORE_GIT_DIR
-          - pwd
-          - echo $SEMAPHORE_PIPELINE_ID
-          - echo "Hello from $SEMAPHORE_JOB_ID"
+          - cache restore --key Gemfile.lock
+          - bundle install --path=vendor/bundle
+          - cache store --key Gemfile.lock --path vendor
