@@ -46,6 +46,8 @@ blocks:
       jobs:
       - name: Install bundle 2
         commands:
+          - echo "v1-git" > /tmp/git-key
+          - cache restore --key /tmp/git-key
           - checkout
           - cd $SEMAPHORE_GIT_DIR
           - cache restore --key Gemfile.lock
