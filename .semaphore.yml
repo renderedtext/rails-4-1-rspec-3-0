@@ -24,11 +24,12 @@ blocks:
       jobs:
       - name: Install bundle 1
         commands:
-          - echo "v1-git" > /tmp/git-key
+          - echo "v2-git" > /tmp/git-key
           - cache restore --key Gemfile.lock
           - cache restore --key /tmp/git-key
           - bundle install --path=vendor/bundle
           - cache store --key Gemfile.lock --path vendor
+          - cd
           - cache store --key /tmp/git-key --path $SEMAPHORE_GIT_DIR/.git
 
   - name: "Stage 2 -- reuse cache"
@@ -51,7 +52,7 @@ blocks:
           - export SSH_PRIVATE_KEY_PATH=/tmp/key
           - cd
           - rm -rf $SEMAPHORE_GIT_DIR
-          - echo "v1-git" > /tmp/git-key
+          - echo "v2-git" > /tmp/git-key
           - cache restore --key /tmp/git-key
           - cd $SEMAPHORE_GIT_DIR
           - cache restore --key Gemfile.lock
