@@ -1,5 +1,5 @@
 version: "v3.0"
-name: My first pipeline
+name: My first pipeline touch
 semaphore_image: standard
 blocks:
   - name: "Stage 1 -- create cache"
