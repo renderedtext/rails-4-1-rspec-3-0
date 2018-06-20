@@ -16,15 +16,18 @@ blocks:
           value: "u180539"
         - name: SEMAPHORE_CACHE_URL
           value: "u180539.your-storagebox.de"
+        - name: SEMAPHORE_CACHE_URL
+          value: "u180539.your-storagebox.de"
+        - name: SSH_PRIVATE_KEY_PATH
+          value: .semaphore/hetzner_storage_bx20
 
       jobs:
       - name: Install bundle
         commands:
           - pwd
-          - wget https://raw.githubusercontent.com/semaphoreci/toolbox/master/cache && chmod +x cache
-          - ./cache restore --key Gemfile.lock
+          - cache restore --key Gemfile.lock
           - bundle install --path=vendor/bundle
-          - ./cache store --key Gemfile.lock --path vendor
+          - cache store --key Gemfile.lock --path vendor
 
       - name: List files
         commands:
